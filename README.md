@@ -3,11 +3,25 @@
 Makes the mineral pixels in 18 ore textures glow, without lighting the surrounding rock.
 An independent Horizon mod, not an official port of Emissive Glowing Ores.
 
-**Requires:** Linux, curl, Git, Python 3.11+, Rust/Cargo with rustup, ImageMagick (`magick`),
-and a Horizon client with **mod API 17+** (PR [#2888](https://github.com/horizon-rust/horizon/pull/2888)).
-The installer builds the mod locally; the first build can take several minutes.
+**Requires:** a Horizon client with **mod API 17+**
+(PR [#2888](https://github.com/horizon-rust/horizon/pull/2888)).
 
-## Install
+## Download and install
+
+1. Download [`horizon_emissive_ores.hmod`](https://github.com/ESHAYAT102/horizon-emissive-ores/releases/latest/download/horizon_emissive_ores.hmod) from [Releases](https://github.com/ESHAYAT102/horizon-emissive-ores/releases).
+2. Close Horizon and copy the file into your game home's **`horizon-mods`** folder.
+   On Linux, the default is `~/.local/share/horizon/horizon-mods/`. Create it if needed.
+   For a custom instance, use its game folder instead.
+3. Start Horizon, open **Options → Mods**, enable **Horizon Emissive Ores**,
+   then open its **Settings** and turn **Emissive ores: ON**.
+
+No Rust or build tools are needed for the download. The package targets vanilla **26.3** textures.
+To remove it manually, close Horizon and delete the `.hmod` file.
+
+## Install from source (Linux)
+
+Requires curl, Git, Python 3.11+, Rust/Cargo with rustup, and ImageMagick (`magick`).
+This builds masks from your own prepared textures; the first build can take several minutes.
 
 Close Horizon, then run:
 
@@ -28,5 +42,6 @@ curl -fsSL https://raw.githubusercontent.com/ESHAYAT102/horizon-emissive-ores/ma
 
 Restart Horizon afterward. Saved mod settings are kept; worlds and other mods are untouched.
 
-Masks are generated from **your own local vanilla textures**. Do not publish the generated
-`.hmod` or `.local/` files. Custom resource packs may need different masks.
+Source builds generate masks from **your own local vanilla textures**. Custom resource packs
+may need different masks. Generated files stay outside Git. The MIT license covers the original
+mod code, not the Minecraft artwork used to derive the prebuilt masks. Not affiliated with Mojang.

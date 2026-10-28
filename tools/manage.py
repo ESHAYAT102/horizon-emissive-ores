@@ -1,4 +1,4 @@
-"""Install/uninstall only this mod. Generated game-derived assets remain local."""
+"""Install/uninstall only this mod. Build artifacts remain outside the source tree in Git."""
 import argparse
 from datetime import datetime, timezone
 import json

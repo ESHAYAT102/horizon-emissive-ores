@@ -1,8 +1,8 @@
-"""Build a PRIVATE .hmod from the player's textures; never publish its derived PNGs.
+"""Build a texture-matched .hmod from the player's prepared textures.
 
 Usage: python3 tools/build_matched.py /path/to/resources/assets/minecraft/textures/block
-Requires ImageMagick for PNG decoding and the adjacent cargo-horizon-mod build tool.
-Source assets are untouched. Derived assets/packages stay under ignored .local/.
+Requires ImageMagick for PNG decoding and a compatible cargo-horizon-mod build tool.
+Source textures are untouched. Derived assets/packages stay under ignored .local/.
 """
 import json
 import argparse
@@ -102,7 +102,7 @@ def main(textures, tool):
                    env=dict(os.environ, CARGO_TARGET_DIR=str(build / 'target')))
     (build / 'coverage.json').write_text(json.dumps(coverage, indent=2) + '\n')
     print(json.dumps(coverage, indent=2))
-    print('PRIVATE PACKAGE: ' + str(build / 'target/horizon-mod/horizon_emissive_ores.hmod'))
+    print('PACKAGE: ' + str(build / 'target/horizon-mod/horizon_emissive_ores.hmod'))
 
 
 if __name__ == '__main__':
