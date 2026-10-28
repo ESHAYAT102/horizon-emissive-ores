@@ -1,8 +1,8 @@
 id = "horizon_emissive_ores"
 name = "Horizon Emissive Ores"
-version = "0.1.2"
+version = "0.1.3"
 description = "Full-bright ore overlays. Local texture-matched build lights every mineral pixel, not the surrounding rock. Terrain only."
 authors = ["ESHAYAT102"]
 api = "0.2"
-capabilities = ["game-read", "render", "ui", "storage", "registries"]
-experimental = ["render", "ui"]
+capabilities = ["game-read", "render", "registries"]
+experimental = ["render"]

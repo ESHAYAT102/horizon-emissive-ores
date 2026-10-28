@@ -1,0 +1,10 @@
+[package]
+name = "emissive-ores-sandbox-check"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+horizon-mods = { git = "https://github.com/ESHAYAT102/horizon", rev = "52f1ba398a8fa0419508eda3e3c02afac673d01a", features = ["runtime"] }
+
+[workspace]

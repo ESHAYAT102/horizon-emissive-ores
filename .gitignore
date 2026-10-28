@@ -1,3 +1,4 @@
 target/
 __pycache__/
 .local/
+/tools/sandbox/Cargo.lock

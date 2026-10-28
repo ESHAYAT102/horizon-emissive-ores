@@ -75,17 +75,13 @@ def install_package(home, package):
         shutil.copy2(destination, backup / destination.name)
     write_atomic(destination, package.read_bytes())
     set_enabled(home, True)
-    # Enable effects on first install, but preserve an existing user's ON/OFF preference.
-    preference = destination.parent / '.horizon-mod-data' / ID / 'enabled'
-    if not preference.exists():
-        write_atomic(preference, b'true')
     print(f'Installed {destination}. Restart Horizon to load textures.')
 
 
 def uninstall(home):
     (home / 'horizon-mods' / f'{ID}.hmod').unlink(missing_ok=True)
     set_enabled(home, False)
-    print('Uninstalled Emissive Ores. Saved settings kept. Restart Horizon.')
+    print('Uninstalled Emissive Ores. Other mods and legacy saved settings kept. Restart Horizon.')
 
 
 def install(home, texture_path):

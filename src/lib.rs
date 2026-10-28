@@ -1,4 +1,4 @@
-use horizon_mod_sdk::{Mod, Registration, game, render, storage, ui};
+use horizon_mod_sdk::{Mod, Registration, game, render};
 
 const ORES: &[&str] = &[
     "coal", "iron", "copper", "gold", "redstone", "emerald", "lapis", "diamond",
@@ -24,39 +24,14 @@ fn materials() -> Vec<render::EmissiveMaterial> {
 }
 
 struct Ores {
-    enabled: bool,
     applied_dimension: Option<String>,
-}
-
-impl Ores {
-    fn settings(&self) {
-        ui::set_settings(&[ui::Widget::Button(ui::ButtonWidget {
-            id: 1,
-            label: format!("Emissive ores: {}", if self.enabled { "ON" } else { "OFF" }),
-        })]);
-    }
-
-    fn toggle(&mut self) -> Result<(), String> {
-        let enabled = !self.enabled;
-        // Persist first: a failed save must not silently change the active setting.
-        storage::set("enabled", if enabled { b"true" } else { b"false" })?;
-        self.enabled = enabled;
-        self.applied_dimension = None;
-        if !enabled {
-            render::set_emissive_materials(&[], false)?;
-        }
-        self.settings();
-        Ok(())
-    }
 }
 
 impl Mod for Ores {
     fn init() -> Result<(Self, Registration), String> {
         let ores = Self {
-            enabled: storage::get("enabled").as_deref() == Some(b"true"),
             applied_dimension: None,
         };
-        ores.settings();
         Ok((ores, Registration::new().on_tick()))
     }
 
@@ -67,34 +42,11 @@ impl Mod for Ores {
             }
             return;
         };
-        if self.enabled && self.applied_dimension.as_deref() != Some(&player.dimension) {
-            match render::set_emissive_materials(&materials(), false) {
-                Ok(()) => self.applied_dimension = Some(player.dimension),
-                Err(error) => {
-                    self.enabled = false;
-                    horizon_mod_sdk::log::write(
-                        horizon_mod_sdk::log::Level::Error,
-                        &format!("Emissive ores disabled: {error}"),
-                    );
-                    self.settings();
-                }
-            }
+        if self.applied_dimension.as_deref() != Some(&player.dimension) {
+            render::set_emissive_materials(&materials(), false)
+                .expect("Could not apply emissive ore materials");
+            self.applied_dimension = Some(player.dimension);
         }
-    }
-
-    fn ui_select(&mut self, id: u32, _row: u32) {
-        if id == 1
-            && let Err(error) = self.toggle()
-        {
-            horizon_mod_sdk::log::write(
-                horizon_mod_sdk::log::Level::Error,
-                &format!("Could not change emissive ores: {error}"),
-            );
-        }
-    }
-
-    fn ui_settings_opened(&mut self) {
-        self.settings();
     }
 }
 

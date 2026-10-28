@@ -12,8 +12,8 @@ An independent Horizon mod, not an official port of Emissive Glowing Ores.
 2. Close Horizon and copy the file into your game home's **`horizon-mods`** folder.
    On Linux, the default is `~/.local/share/horizon/horizon-mods/`. Create it if needed.
    For a custom instance, use its game folder instead.
-3. Start Horizon, open **Options → Mods**, enable **Horizon Emissive Ores**,
-   then open its **Settings** and turn **Emissive ores: ON**.
+3. Start Horizon, open **Options → Mods**, and turn **Horizon Emissive Ores: ON**.
+   That single button controls the glow—there is no second Settings toggle.
 
 No Rust or build tools are needed for the download. The package targets vanilla **26.3** textures.
 To remove it manually, close Horizon and delete the `.hmod` file.
@@ -31,7 +31,7 @@ curl -fsSL https://raw.githubusercontent.com/ESHAYAT102/horizon-emissive-ores/ma
 
 The script clones/updates the source in `~/.local/share/horizon-emissive-ores/source`,
 finds your prepared Horizon textures, builds the masks, installs the `.hmod`,
-and enables it. Restart Horizon. Toggle the effect in **Options → Mods → Settings**.
+and enables it. Restart Horizon. Toggle the effect directly in **Options → Mods**.
 If textures aren't found, append `-s -- --textures /path/to/assets/minecraft/textures/block` after `sh`.
 
 ## Uninstall

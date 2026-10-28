@@ -28,7 +28,8 @@ class Installation(unittest.TestCase):
             manage.install_package(home, package)
             self.assertIn(f'mod.{manage.ID}:true', (home / 'horizon-mods.txt').read_text())
             preference = mods / '.horizon-mod-data' / manage.ID / 'enabled'
-            self.assertEqual(preference.read_bytes(), b'true')
+            self.assertFalse(preference.exists(), 'No second settings toggle should be created')
+            preference.parent.mkdir(parents=True)
             preference.write_bytes(b'false')
             manage.install_package(home, package)
             self.assertEqual(preference.read_bytes(), b'false')
