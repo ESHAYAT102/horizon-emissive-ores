@@ -1,0 +1,14 @@
+[package]
+name = "horizon-emissive-ores"
+version = "0.1.2"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+horizon-mod-sdk = { git = "https://github.com/ESHAYAT102/horizon", rev = "52f1ba398a8fa0419508eda3e3c02afac673d01a" }
+
+[workspace]
